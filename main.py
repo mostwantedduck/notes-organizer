@@ -329,8 +329,7 @@ def run():
     print("-> aip TARGET_IP VHOST")
     print("-> sudo nmap -sS -p- $ip -vvv -n -Pn -T5 -oN nmap/ports.nmap")
     print("-> extractPorts nmap/ports.nmap")
-    print("-> nmap -sC -sV -p$(cat nmap/ports.nmap | grep -oP '\\d{2,5}/' 
-| awk '{print $1}' "
+    print("-> nmap -sC -sV -p$(cat nmap/ports.nmap | grep -oP '\\d{2,5}/' | awk '{print $1}' "
           "FS=\"/\" | xargs | tr ' ' ',') -n -Pn $ip -oA nmap/scan.nmap")
     print("    -----------------------------------")
     print("[+] run again")
