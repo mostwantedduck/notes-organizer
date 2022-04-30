@@ -325,10 +325,14 @@ def run():
         return
 
     print("[-] nmap files were not found. please run the commands below:")
-    print("aip TARGET_IP VHOST")
-    print("sudo nmap -sS -p- $ip -vvv -n -Pn -oN nmap/ports.nmap")
-    print("nmap -sC -sV -p$(cat nmap/ports.nmap | grep -oP '\\d{2,5}/' | awk '{print $1}' "
+    print("    -----------------------------------")
+    print("-> aip TARGET_IP VHOST")
+    print("-> sudo nmap -sS -p- $ip -vvv -n -Pn -T5 -oN nmap/ports.nmap")
+    print("-> extractPorts nmap/ports.nmap")
+    print("-> nmap -sC -sV -p$(cat nmap/ports.nmap | grep -oP '\\d{2,5}/' 
+| awk '{print $1}' "
           "FS=\"/\" | xargs | tr ' ' ',') -n -Pn $ip -oA nmap/scan.nmap")
+    print("    -----------------------------------")
     print("[+] run again")
 
 
