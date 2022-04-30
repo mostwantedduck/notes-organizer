@@ -1,0 +1,27 @@
+{
+  "ldap": {
+    "enum": {
+      "nmap": "nmap -n -sV --script \"ldap* and not brute\" -p 389 {0} -oN enum/04.nmap-ldap.txt"
+    }
+  },
+  "kerberos": {
+    "enum": {
+      "kerbrute": "kerbrute userenum --dc {0} -d {0} user-list.txt",
+      "nmap": "nmap -p88 --script=krb5-enum-users --script-args krb5-enum-users.realm='{0}',userdb=user-list.txt {1}` -oN enum/04.nmap-kerberos.txt"
+    }
+  },
+  "web": {
+    "enum": {
+      "gobuster": "gobuster dir -u {0}:{1} -w /usr/share/dirbuster/wordlists/directory-list-2.3-small.txt #EXT -o enum/02.gobuster-dir-{0}_{1}.txt",
+      "whatweb": "whatweb -v {0}:{1} --log-verbose=enum/01.whatweb-{0}_{1}.txt",
+      "wfuzz": "wfuzz -c -L --hc=404 -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt http://{0}:{1}/FUZZ -f enum/03.wfuzz-dir-{0}_{1}.txt,raw"
+    },
+    "fuzz": {
+      "wfuzz": "wfuzz -c -L --hc=404 -w /usr/share/wfuzz/wordlist/general/common.txt -w /usr/share/wfuzz/wordlist/Injections/Traversal.txt http://$ip:$port/index.php?FUZZ=/FUZ2Z -f enum/03.wfuzz-fuzzing.txt,raw"
+    },
+    "vhost": {
+      "gobuster": "gobuster vhost -f enum/02.gobuster-vhost-{0}.txt,raw -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u {0} -o enum/02.gobuster-vhost-{0}.txt",
+      "wfuzz": "`wfuzz -c -L -H 'Host: FUZZ.{0}' -u 'http://{0}' -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -f enum/03.wfuzz-vhost.txt,raw"
+    }
+  }
+}
